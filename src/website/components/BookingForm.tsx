@@ -15,6 +15,10 @@ const services = [
 const inputBase =
   "w-full rounded-sm border border-navy/15 bg-white px-4 py-3 text-sm text-charcoal outline-none transition focus:border-gold focus:ring-1 focus:ring-gold";
 
+// Web3Forms access keys are public by design (used in client-side forms).
+// Set NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY in .env.local and in Vercel.
+const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+
 export default function BookingForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -25,23 +29,33 @@ export default function BookingForm() {
     setError(null);
     setSubmitting(true);
 
-    const payload = Object.fromEntries(new FormData(event.currentTarget).entries());
+    const formData = new FormData(event.currentTarget);
+    formData.append("access_key", ACCESS_KEY ?? "");
+    formData.append("from_name", "The Garment Concierge");
+    formData.append(
+      "subject",
+      `New collection request — ${formData.get("name")} (${formData.get("postcode")})`,
+    );
 
     try {
-      const res = await fetch("/api/bookings", {
+      // Submitted from the browser so Cloudflare's bot check passes cleanly.
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: formData,
       });
+      const data = (await res.json()) as { success?: boolean; message?: string };
 
-      if (!res.ok) {
-        const data = (await res.json().catch(() => null)) as { error?: string } | null;
-        throw new Error(data?.error ?? "Something went wrong. Please try again.");
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        throw new Error(data.message || "We couldn't submit your request. Please try again.");
       }
-
-      setSubmitted(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      setError(
+        err instanceof Error && err.message
+          ? err.message
+          : "Something went wrong. Please try again, or email us directly.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -126,6 +140,9 @@ export default function BookingForm() {
         </label>
         <textarea id="notes" name="notes" rows={3} placeholder="Anything we should know about your garments?" className={inputBase} />
       </div>
+
+      {/* Honeypot: bots fill this; humans never see it. Web3Forms drops matches. */}
+      <input type="checkbox" name="botcheck" tabIndex={-1} aria-hidden="true" className="hidden" />
 
       {error && (
         <p className="sm:col-span-2 rounded-sm border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
