@@ -1,0 +1,40 @@
+# ── Secrets & environment ──────────────────────────────
+.env
+.env.*
+*.env
+.env.txt
+*.token
+*.pem
+*.key
+secrets.*
+credentials.*
+
+# ── Node / Next.js (website) ───────────────────────────
+node_modules/
+.next/
+out/
+dist/
+build/
+.turbo/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.vercel/
+
+# ── Caches / coverage ──────────────────────────────────
+.cache/
+coverage/
+.eslintcache
+
+# ── Claude Code (local / personal) ─────────────────────
+.claude/settings.local.json
+
+# ── OS / editor ────────────────────────────────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+.idea/
+.vscode/
