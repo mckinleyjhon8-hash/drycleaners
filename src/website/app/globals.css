@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-charcoal font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif;
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-navy;
+  }
+}
+
+@layer components {
+  .container-luxe {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-luxe text-gold-dark;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center rounded-sm px-7 py-3.5 text-sm font-medium tracking-wide transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-gold text-navy hover:bg-gold-dark;
+  }
+
+  .btn-outline-dark {
+    @apply btn border border-navy/30 text-navy hover:bg-navy hover:text-cream;
+  }
+
+  .btn-outline-light {
+    @apply btn border border-cream/40 text-cream hover:bg-cream hover:text-navy;
+  }
+
+  .hairline {
+    @apply h-px w-12 bg-gold;
+  }
+}
