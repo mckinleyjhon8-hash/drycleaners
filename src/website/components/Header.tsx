@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Logo from "@/components/Logo";
 
 const navLinks = [
   { href: "#how-it-works", label: "How It Works" },
@@ -29,11 +30,8 @@ export default function Header() {
       }`}
     >
       <div className="container-luxe flex h-20 items-center justify-between">
-        <a
-          href="#top"
-          className="font-serif text-xl font-semibold tracking-wide text-cream sm:text-2xl"
-        >
-          The Garment Concierge
+        <a href="#top" className="text-xl text-cream sm:text-2xl">
+          <Logo />
         </a>
 
         <nav className="hidden items-center gap-9 lg:flex">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans, Playfair_Display } from "next/font/google";
 import Header from "@/components/Header";
+import Logo from "@/components/Logo";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -65,8 +66,8 @@ function Footer() {
       <div className="container-luxe py-16">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <p className="font-serif text-2xl font-semibold tracking-wide text-cream">
-              The Garment Concierge
+            <p className="text-2xl text-cream">
+              <Logo />
             </p>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-cream/70">
               Luxury garment care for Milton Keynes — collected from your door,
