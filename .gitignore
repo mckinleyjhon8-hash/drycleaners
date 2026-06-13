@@ -9,6 +9,10 @@
 secrets.*
 credentials.*
 
+# Keep env templates (placeholders only, no secrets)
+!.env.example
+!**/.env.example
+
 # ── Node / Next.js (website) ───────────────────────────
 node_modules/
 .next/
