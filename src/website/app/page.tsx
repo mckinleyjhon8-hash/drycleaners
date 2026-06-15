@@ -76,7 +76,7 @@ const plans = [
     cta: "Book a Collection",
     features: [
       "A transparent price for every garment",
-      "Collection & delivery from £4.95 (free over £30)",
+      "Collection & delivery from £4.99 (free over £30)",
       "48-hour standard turnaround",
       "No commitment, ever",
     ],

@@ -49,7 +49,9 @@ Your competitor comparison shows no single cleaner wins everything. Route by cat
 
 Trade cost = cleaner retail − 30% (assumed). Concierge price = the customer-facing
 price; **the margin is the buffer we keep on every item**, before membership and
-delivery fees. Everyday items source from Fluff & Tumble, specialist from One Stop.
+delivery fees. Everyday items source from Fluff & Tumble, specialist from One Stop. (Prices below
+are shown rounded; the live site displays them as charm prices ending in .99 —
+e.g. £23.99 — which changes each margin by ≤1p.)
 
 ### Business & Formalwear
 | Item | Cleaner retail | Trade cost | Concierge price | Our margin |
@@ -149,7 +151,7 @@ per-order logistics cost. Concentrate Tier-1 postcodes before widening coverage.
 
 | Plan | Collection & delivery |
 |---|---|
-| Pay As You Go | From £4.95; free over £30 |
+| Pay As You Go | From £4.99; free over £30 |
 | Concierge Member | Always free |
 
 (Modest PAYG fee protects margin on small orders; membership removes it as a perk.)
