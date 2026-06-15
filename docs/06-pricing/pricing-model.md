@@ -47,30 +47,62 @@ Your competitor comparison shows no single cleaner wins everything. Route by cat
 
 ## 4. Concierge price list & margins (illustrative)
 
-Trade cost = cleaner retail − 30%. Concierge price = premium round figure.
+Trade cost = cleaner retail − 30% (assumed). Concierge price = the customer-facing
+price; **the margin is the buffer we keep on every item**, before membership and
+delivery fees. Everyday items source from Fluff & Tumble, specialist from One Stop.
 
-### Everyday (via Fluff & Tumble)
-| Item | F&T retail | Trade cost | Concierge price | Margin |
+### Business & Formalwear
+| Item | Cleaner retail | Trade cost | Concierge price | Our margin |
 |---|---|---|---|---|
-| 2-piece suit | £14.95 | £10.47 | £24 | £13.53 (56%) |
-| 3-piece suit | £17.95 | £12.57 | £29 | £16.43 (57%) |
+| Two-piece suit | £14.95 | £10.47 | £24 | £13.53 (56%) |
+| Three-piece suit | £17.95 | £12.57 | £29 | £16.43 (57%) |
+| Jacket / blazer | £8.50 | £5.95 | £14 | £8.05 (58%) |
 | Trousers | £7.50 | £5.25 | £12 | £6.75 (56%) |
-| Shirt (wash & iron) | £2.95 | £2.07 | £4.50 | £2.43 (54%) |
+| Waistcoat | £5.50 | £3.85 | £9 | £5.15 (57%) |
+| Shirt, washed & pressed | £2.95 | £2.07 | £4.50 | £2.43 (54%) |
+| Tie or scarf | £4.50 | £3.15 | £7 | £3.85 (55%) |
 | Standard dress | £12.00 | £8.40 | £20 | £11.60 (58%) |
+| Silk dress | £14.50 | £10.15 | £24 | £13.85 (58%) |
+| Dress & jacket | £18.50 | £12.95 | £30 | £17.05 (57%) |
+| Skirt | £7.50 | £5.25 | £12 | £6.75 (56%) |
+| Pleated skirt | £9.50 | £6.65 | £15 | £8.35 (56%) |
+
+### Outerwear, Knitwear & Occasion
+| Item | Cleaner retail | Trade cost | Concierge price | Our margin |
+|---|---|---|---|---|
+| Short coat | £11.50 | £8.05 | £19 | £10.95 (58%) |
 | Long coat | £14.00 | £9.80 | £24 | £14.20 (59%) |
 | Puffer jacket | £16.00 | £11.20 | £27 | £15.80 (59%) |
-| Duvet (double/king) | £19.50 | £13.65 | £32 | £18.35 (57%) |
-| Service wash (per kg) | £4.50 | £3.15 | £8 | £4.85 (61%) |
+| Canada Goose / Moncler | £35.00 | £24.50 | £55 | £30.50 (55%) |
+| Wax jacket | £45.00 | £31.50 | £69 | £37.50 (54%) |
+| Jumper / cardigan | £6.50 | £4.55 | £11 | £6.45 (59%) |
+| Hoodie / sweatshirt | £7.00 | £4.90 | £12 | £7.10 (59%) |
+| Evening gown | £16.75 | £11.73 | £28 | £16.27 (58%) |
+| Wedding dress | £75.00 | £52.50 | £120 | £67.50 (56%) |
+| Bridesmaid dress | £25.00 | £17.50 | £42 | £24.50 (58%) |
+| Saree | £25.00 | £17.50 | £42 | £24.50 (58%) |
+| Asian two-piece | £9.95 | £6.97 | £18 | £11.03 (61%) |
 
-### Specialist (via One Stop)
-| Item | One Stop retail | Trade cost | Concierge price | Margin |
+### Specialist, Home & Laundry
+| Item | Cleaner retail | Trade cost | Concierge price | Our margin |
 |---|---|---|---|---|
 | Leather jacket | £30.00 | £21.00 | £48 | £27.00 (56%) |
-| Wedding dress | £75.00 | £52.50 | £110 | £57.50 (52%) |
+| Leather coat | £40.00 | £28.00 | £65 | £37.00 (57%) |
+| Leather trousers | £15.00 | £10.50 | £29 | £18.50 (64%) |
+| Motorbike leathers | £50.00 | £35.00 | £85 | £50.00 (59%) |
 | UGG boots | £15.00 | £10.50 | £24 | £13.50 (56%) |
 | Designer handbag | £15.00 | £10.50 | £28 | £17.50 (62%) |
+| Duvet (single) | £16.00 | £11.20 | £26 | £14.80 (57%) |
+| Duvet (double / king) | £19.50 | £13.65 | £32 | £18.35 (57%) |
+| Pillows (each) | £10.50 | £7.35 | £17 | £9.65 (57%) |
+| Curtains (per pair) | £7.50 | £5.25 | £13 | £7.75 (60%) |
+| Service wash (per kg) | £4.50 | £3.15 | £8 | £4.85 (61%) |
+| Trouser hem | £9.50 | £6.65 | £15 | £8.35 (56%) |
+| Zip replacement | £11.00 | £7.70 | £18 | £10.30 (57%) |
 
-**Gross margins land ~52–62% before logistics** — healthy for an asset-light model.
+**Every customer price carries a 54–65% gross margin over the trade rate** — and that's
+*before* the £19/mo membership and delivery fees, which are additional buffer. Per-order
+logistics (collection + delivery) come out of this margin (see §6).
 
 ---
 

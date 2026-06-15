@@ -1,4 +1,5 @@
 import BookingForm from "@/components/BookingForm";
+import PriceCarousel from "@/components/PriceCarousel";
 
 /* ----------------------------------------------------------------- data --- */
 
@@ -63,15 +64,6 @@ const services = [
       <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" strokeLinecap="round" strokeLinejoin="round" />
     ),
   },
-];
-
-const priceList = [
-  { item: "Two-piece suit", price: "£24" },
-  { item: "Shirt, washed & pressed", price: "£4.50" },
-  { item: "Dress", price: "£20" },
-  { item: "Winter coat", price: "£24" },
-  { item: "Double duvet", price: "£32" },
-  { item: "Leather jacket", price: "£48" },
 ];
 
 const plans = [
@@ -256,22 +248,8 @@ function Pricing() {
           </p>
         </div>
 
-        <div className="mx-auto mt-14 max-w-3xl rounded-sm border border-navy/10 bg-white p-8 sm:p-10">
-          <p className="eyebrow mb-6 text-center">Representative pricing</p>
-          <dl className="grid gap-x-12 gap-y-1 sm:grid-cols-2">
-            {priceList.map((row) => (
-              <div
-                key={row.item}
-                className="flex items-baseline justify-between border-b border-navy/10 py-3"
-              >
-                <dt className="text-sm text-charcoal/80">{row.item}</dt>
-                <dd className="font-serif text-lg font-semibold text-navy">from {row.price}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className="mt-6 text-center text-xs text-charcoal/45">
-            A selection of our most-requested items. Final pricing is confirmed before any cleaning begins.
-          </p>
+        <div className="mt-14">
+          <PriceCarousel />
         </div>
 
         <div className="mx-auto mt-14 grid max-w-4xl gap-8 lg:grid-cols-2">
