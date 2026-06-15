@@ -113,8 +113,15 @@ const areas = [
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-navy">
+      <img
+        src="/images/hero-garments.jpg"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-navy/95 via-navy/80 to-navy/55" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(201,168,76,0.16),_transparent_55%)]" />
-      <div className="container-luxe relative flex min-h-[92vh] flex-col justify-center py-32">
+      <div className="container-luxe relative z-10 flex min-h-[92vh] flex-col justify-center py-32">
         <div className="max-w-3xl animate-fade-up">
           <p className="eyebrow mb-6 text-gold">Milton Keynes · White-Glove Garment Care</p>
           <h1 className="font-serif text-5xl font-semibold leading-[1.05] text-cream sm:text-6xl lg:text-7xl">
@@ -222,8 +229,16 @@ function Services() {
 
 function Quote() {
   return (
-    <section className="bg-navy py-24 sm:py-28">
-      <div className="container-luxe text-center">
+    <section className="relative overflow-hidden bg-navy py-24 sm:py-28">
+      <img
+        src="/images/cuff-detail.jpg"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-navy/80" />
+      <div className="container-luxe relative z-10 text-center">
         <p className="mx-auto max-w-3xl font-display text-3xl font-medium italic leading-snug text-cream sm:text-4xl">
           “The luxury isn&apos;t the cleaning. It&apos;s never having to think about it.”
         </p>
