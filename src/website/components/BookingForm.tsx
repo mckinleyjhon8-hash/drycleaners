@@ -23,8 +23,11 @@ const inputBase =
   "w-full rounded-sm border border-navy/15 bg-white px-4 py-3 text-sm text-charcoal outline-none transition focus:border-gold focus:ring-1 focus:ring-gold";
 const labelBase = "mb-2 block text-xs font-medium text-charcoal/70";
 
-// Web3Forms access keys are public by design (used in client-side forms).
-const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+// Bookings post to the n8n pipeline (webhook → Postgres + Telegram alert).
+// Override via NEXT_PUBLIC_N8N_BOOKING_WEBHOOK if the n8n URL ever changes.
+const BOOKING_ENDPOINT =
+  process.env.NEXT_PUBLIC_N8N_BOOKING_WEBHOOK ??
+  "https://primary-production-68f72.up.railway.app/webhook/garment-booking";
 
 function Legend({ children }: { children: React.ReactNode }) {
   return (
@@ -44,27 +47,28 @@ export default function BookingForm() {
     setError(null);
     setSubmitting(true);
 
-    const formData = new FormData(event.currentTarget);
-    formData.append("access_key", ACCESS_KEY ?? "");
-    formData.append("from_name", "The Garment Concierge");
-    formData.append(
-      "subject",
-      `New booking — ${formData.get("name")} (${formData.get("postcode")})`,
-    );
+    const payload = Object.fromEntries(new FormData(event.currentTarget).entries());
+
+    // Honeypot: a filled "botcheck" means a bot — drop it silently.
+    if (payload.botcheck) {
+      setSubmitted(true);
+      setSubmitting(false);
+      return;
+    }
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch(BOOKING_ENDPOINT, {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
-      const data = (await res.json()) as { success?: boolean; message?: string };
 
-      if (data.success) {
-        setSubmitted(true);
-        if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        throw new Error(data.message || "We couldn't submit your booking. Please try again.");
+      if (!res.ok) {
+        throw new Error("We couldn't submit your booking. Please try again.");
       }
+
+      setSubmitted(true);
+      if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
       setError(
         err instanceof Error && err.message
@@ -208,7 +212,7 @@ export default function BookingForm() {
         </div>
       </div>
 
-      {/* Honeypot: bots fill this; humans never see it. Web3Forms drops matches. */}
+      {/* Honeypot: bots fill this; humans never see it. */}
       <input type="checkbox" name="botcheck" tabIndex={-1} aria-hidden="true" className="hidden" />
 
       <label className="flex items-start gap-3 text-sm text-charcoal/75">
