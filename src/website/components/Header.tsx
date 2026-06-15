@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import Logo from "@/components/Logo";
 
 const navLinks = [
-  { href: "#how-it-works", label: "How It Works" },
-  { href: "#services", label: "Services" },
-  { href: "#membership", label: "Pricing" },
-  { href: "#coverage", label: "Coverage" },
+  { href: "/#how-it-works", label: "How It Works" },
+  { href: "/#services", label: "Services" },
+  { href: "/#membership", label: "Pricing" },
+  { href: "/#coverage", label: "Coverage" },
 ];
 
 export default function Header() {
@@ -30,7 +30,7 @@ export default function Header() {
       }`}
     >
       <div className="container-luxe flex h-20 items-center justify-between">
-        <a href="#top" className="text-xl text-cream sm:text-2xl">
+        <a href="/" className="text-xl text-cream sm:text-2xl">
           <Logo />
         </a>
 
@@ -44,7 +44,7 @@ export default function Header() {
               {link.label}
             </a>
           ))}
-          <a href="#book" className="btn-primary">
+          <a href="/book" className="btn-primary">
             Book a Collection
           </a>
         </nav>
@@ -79,7 +79,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="#book"
+            href="/book"
             onClick={() => setMenuOpen(false)}
             className="btn-primary mt-5 w-full"
           >

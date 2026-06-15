@@ -1,4 +1,3 @@
-import BookingForm from "@/components/BookingForm";
 import PriceCarousel from "@/components/PriceCarousel";
 
 /* ----------------------------------------------------------------- data --- */
@@ -135,7 +134,7 @@ function Hero() {
             detail — so you never think about it again.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <a href="#book" className="btn-primary">Book a Collection</a>
+            <a href="/book" className="btn-primary">Book a Collection</a>
             <a href="#membership" className="btn-outline-light">View Pricing</a>
           </div>
           <p className="mt-10 text-sm text-cream/50">
@@ -307,7 +306,7 @@ function Pricing() {
               </ul>
 
               <a
-                href="#book"
+                href="/book"
                 className={`mt-8 ${plan.featured ? "btn-primary" : "btn-outline-dark"} w-full`}
               >
                 {plan.cta}
@@ -337,7 +336,7 @@ function Coverage() {
             We collect and deliver across MK1–MK19. Not sure if we reach you?
             Enter your postcode when you book and we&apos;ll confirm in moments.
           </p>
-          <a href="#book" className="btn-outline-dark mt-8">Check My Postcode</a>
+          <a href="/book" className="btn-outline-dark mt-8">Check My Postcode</a>
         </div>
 
         <ul className="grid grid-cols-1 gap-px overflow-hidden rounded-sm border border-navy/10 bg-navy/10 sm:grid-cols-2">
@@ -356,31 +355,20 @@ function Coverage() {
 function Booking() {
   return (
     <section id="book" className="bg-cream py-24 sm:py-32">
-      <div className="container-luxe grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <div className="lg:sticky lg:top-28">
-          <p className="eyebrow">Book a Collection</p>
-          <h2 className="mt-4 text-4xl font-semibold text-navy sm:text-5xl">
-            Request your first collection.
-          </h2>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-charcoal/70">
-            Tell us where you are and what needs caring for. Our concierge team
-            will confirm your collection window and pricing — usually the same day.
-          </p>
-          <div className="mt-8 space-y-4 text-sm text-charcoal/70">
-            <p className="flex items-center gap-3">
-              <span className="hairline" /> No payment required to book
-            </p>
-            <p className="flex items-center gap-3">
-              <span className="hairline" /> Fully insured, door to door
-            </p>
-            <p className="flex items-center gap-3">
-              <span className="hairline" /> Eco-conscious, locally cleaned
-            </p>
-          </div>
-        </div>
-
-        <div className="rounded-sm border border-navy/10 bg-white p-8 shadow-sm sm:p-10">
-          <BookingForm />
+      <div className="container-luxe text-center">
+        <p className="eyebrow">Book a Collection</p>
+        <h2 className="mt-4 text-4xl font-semibold text-navy sm:text-5xl">
+          Reclaim your weekends.
+        </h2>
+        <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-charcoal/70">
+          Tell us where you are and what needs caring for. Our concierge team will
+          confirm your collection window and pricing — usually the same day.
+        </p>
+        <a href="/book" className="btn-primary mt-9">Book a Collection</a>
+        <div className="mx-auto mt-10 flex max-w-lg flex-col items-center gap-3 text-sm text-charcoal/60 sm:flex-row sm:justify-center sm:gap-10">
+          <span>No payment required to book</span>
+          <span>Fully insured, door to door</span>
+          <span>Eco-conscious cleaning</span>
         </div>
       </div>
     </section>
