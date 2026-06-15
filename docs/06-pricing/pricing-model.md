@@ -25,7 +25,7 @@
 | Stream | Description |
 |---|---|
 | Cleaning markup | Spread between **trade rate** (what we pay cleaners) and **concierge price** (what we charge). Primary engine. |
-| Membership fees | ~£19/mo, near-pure margin. |
+| Membership fees | ~£19.99/mo, near-pure margin. |
 | Express surcharge | Premium for next-day turnaround. |
 | Corporate / Airbnb contracts | Later — recurring B2B volume. |
 
@@ -103,21 +103,21 @@ e.g. £23.99 — which changes each margin by ≤1p.)
 | Zip replacement | £11.00 | £7.70 | £18 | £10.30 (57%) |
 
 **Every customer price carries a 54–65% gross margin over the trade rate** — and that's
-*before* the £19/mo membership and delivery fees, which are additional buffer. Per-order
+*before* the £19.99/mo membership and delivery fees, which are additional buffer. Per-order
 logistics (collection + delivery) come out of this margin (see §6).
 
 ---
 
 ## 5. Membership — "The Concierge Membership"
 
-**£19 / month.** Benefits:
+**£19.99 / month.** Benefits:
 - Free collection & delivery on every order (no minimum)
 - 15% off all cleaning
 - Priority scheduling + express slots
 - A dedicated garment-care concierge
 
 **Why it works:**
-- The £19 fee is **near-pure margin** (we're not pre-committing cleaning).
+- The £19.99 fee is **near-pure margin** (we're not pre-committing cleaning).
 - The 15% discount is funded by the 50%+ markup — a member order still nets ~40%+.
 - It removes the "am I using it enough?" anxiety that kills bundle subscriptions.
 - Even at **one order/month** a member is profitable, and members order *more*
@@ -181,7 +181,7 @@ per-order logistics cost. Concentrate Tier-1 postcodes before widening coverage.
 
 ## 10. Open decisions (to revisit with data)
 
-- Membership price point: £15 vs £19 (A/B once live).
+- Membership price point: £19.99 chosen (test £14.99 / £24.99 later).
 - Free-delivery threshold for PAYG (£25 vs £30).
 - Express surcharge level (e.g. +£X or +25%).
 - Whether to add a high-touch VIP tier later (£49/mo, dedicated driver windows).

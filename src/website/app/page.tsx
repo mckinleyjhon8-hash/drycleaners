@@ -83,7 +83,7 @@ const plans = [
   },
   {
     name: "Concierge Member",
-    price: "£19",
+    price: "£19.99",
     cadence: "/ month",
     tagline: "For wardrobes worth looking after.",
     featured: true,

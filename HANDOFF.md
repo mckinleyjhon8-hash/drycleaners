@@ -46,7 +46,7 @@ Full business brief, market data, brand system, and metrics live in **`CLAUDE.md
 
 ---
 
-## 2. Current status (as of 2026-06-13)
+## 2. Current status (as of 2026-06-14)
 
 | Area | Status |
 |------|--------|
@@ -54,6 +54,7 @@ Full business brief, market data, brand system, and metrics live in **`CLAUDE.md
 | Marketing website | ✅ Built — Next.js 14, fully static, production build passes |
 | Booking form | ✅ Working & tested — submits via Web3Forms, emails land in inbox |
 | Favicon / SEO | ✅ Done (navy/gold hanger icon, metadata, mobile nav) |
+| Pricing | ✅ Per-order + £19.99/mo membership; full price list live (carousel) |
 | Deployment (Vercel) | ⏳ NOT deployed yet — see §6 |
 | Real domain / email / phone | ⏳ To be purchased by founder |
 | Dry cleaner contracts | ⏳ To be negotiated (candidate list in `CLAUDE.md`) |
@@ -72,8 +73,9 @@ dry_cleaners_business/
 ├── docs/                 ← business documentation
 │   ├── 01-market-research/market-analysis.md
 │   ├── 02-customer-avatars/customer-personas.md
+│   ├── 06-pricing/pricing-model.md   ← pricing & margins (per-order + membership)
 │   └── 07-financials/financial-model.md
-│   └── (03–17: scaffolded, awaiting content)
+│   └── (other sections: scaffolded, awaiting content)
 └── src/website/          ← THE WEBSITE
     ├── app/
     │   ├── page.tsx       ← entire landing page (all sections)
@@ -82,7 +84,9 @@ dry_cleaners_business/
     │   └── icon.svg       ← hanger favicon
     ├── components/
     │   ├── BookingForm.tsx← booking form (Web3Forms client-side submit)
-    │   └── Header.tsx     ← sticky nav + mobile menu
+    │   ├── Header.tsx     ← sticky nav + mobile menu
+    │   ├── Logo.tsx       ← hanger + wordmark lockup
+    │   └── PriceCarousel.tsx ← swipeable price list (Pricing section)
     ├── .env.local         ← SECRET, git-ignored (recreate per §0 step 4)
     ├── .env.example       ← template showing which env vars are needed
     └── (package.json, tailwind.config.ts, etc.)
@@ -117,6 +121,10 @@ dry_cleaners_business/
   deployment (see §6).
 - **Secrets policy:** never commit `.env*` files. The repo `.gitignore` enforces this
   (a `.gitignore` exception keeps `.env.example` tracked, since it has no real values).
+- **Pricing model:** per-order markup + an optional £19.99/mo membership — NOT
+  all-you-can-eat bundles (wrong fit for lumpy dry-clean demand). ~55% gross margin
+  per item over an assumed 30% cleaner trade rate. Prices use .99 charm endings.
+  Full model: `docs/06-pricing/pricing-model.md`.
 
 ---
 
@@ -147,7 +155,7 @@ dashboard as above. After that, redeploys can be automated.
 - [ ] Once domain/email/phone exist → **swap the placeholders** in the site:
   - Footer & booking section: `hello@thegarmentconcierge.co.uk`, `01908 000 000`
   - Company registration line in the footer
-  - Membership prices (currently indicative: £49 / £89 / £149) — confirm vs financial model
+  - Confirm item prices once the cleaner **trade rate** is negotiated — model in `docs/06-pricing/pricing-model.md`
 - [ ] **Deploy to Vercel** (§6)
 
 ---
@@ -158,6 +166,7 @@ dashboard as above. After that, redeploys can be automated.
 - **Web3Forms dashboard:** https://web3forms.com (manage key, see submissions, lock to domain)
 - **Web3Forms access key:** `0977fe50-67cf-49da-8c45-d4794883bcc9` (public-by-design)
 - **Business brief:** `CLAUDE.md` (includes the dry-cleaner partner shortlist)
+- **Pricing model & margins:** `docs/06-pricing/pricing-model.md`
 - **Market research / personas / financials:** `docs/`
 
 ---
