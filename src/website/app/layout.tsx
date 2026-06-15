@@ -89,7 +89,7 @@ function Footer() {
             <p className="eyebrow text-gold">Company</p>
             <ul className="mt-4 space-y-2 text-sm">
               <li><a className="hover:text-gold" href="#how-it-works">How It Works</a></li>
-              <li><a className="hover:text-gold" href="#membership">Membership</a></li>
+              <li><a className="hover:text-gold" href="#membership">Pricing</a></li>
               <li><a className="hover:text-gold" href="#coverage">Coverage</a></li>
               <li><a className="hover:text-gold" href="#book">Book a Collection</a></li>
             </ul>

@@ -65,41 +65,42 @@ const services = [
   },
 ];
 
-const tiers = [
+const priceList = [
+  { item: "Two-piece suit", price: "£24" },
+  { item: "Shirt, washed & pressed", price: "£4.50" },
+  { item: "Dress", price: "£20" },
+  { item: "Winter coat", price: "£24" },
+  { item: "Double duvet", price: "£32" },
+  { item: "Leather jacket", price: "£48" },
+];
+
+const plans = [
   {
-    name: "The Essential",
-    price: "£49",
-    tagline: "For the considered wardrobe.",
+    name: "Pay As You Go",
+    price: "£0",
+    cadence: "no membership fee",
+    tagline: "Simple pricing, per item.",
     featured: false,
+    cta: "Book a Collection",
     features: [
-      "One scheduled collection per week",
-      "10% off all cleaning",
-      "Free collection & delivery",
-      "Garment care concierge by message",
+      "A transparent price for every garment",
+      "Collection & delivery from £4.95 (free over £30)",
+      "48-hour standard turnaround",
+      "No commitment, ever",
     ],
   },
   {
-    name: "The Signature",
-    price: "£89",
-    tagline: "Our most popular service.",
+    name: "Concierge Member",
+    price: "£19",
+    cadence: "/ month",
+    tagline: "For wardrobes worth looking after.",
     featured: true,
+    cta: "Become a Member",
     features: [
-      "Two collections per week",
+      "Free collection & delivery, always",
       "15% off all cleaning",
-      "Priority scheduling",
-      "Two complimentary Express orders monthly",
-    ],
-  },
-  {
-    name: "The Connoisseur",
-    price: "£149",
-    tagline: "Effortless, unlimited care.",
-    featured: false,
-    features: [
-      "Unlimited collections",
-      "20% off all cleaning",
-      "Dedicated personal concierge",
-      "Complimentary Express & seasonal wardrobe service",
+      "Priority scheduling & express slots",
+      "Your own garment-care concierge",
     ],
   },
 ];
@@ -136,7 +137,7 @@ function Hero() {
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <a href="#book" className="btn-primary">Book a Collection</a>
-            <a href="#membership" className="btn-outline-light">Explore Membership</a>
+            <a href="#membership" className="btn-outline-light">View Pricing</a>
           </div>
           <p className="mt-10 text-sm text-cream/50">
             Collection &amp; delivery across MK&apos;s finest addresses · Fully insured · Eco-conscious cleaning
@@ -240,51 +241,69 @@ function Quote() {
   );
 }
 
-function Membership() {
+function Pricing() {
   return (
     <section id="membership" className="bg-cream py-24 sm:py-32">
       <div className="container-luxe">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow">Membership</p>
+          <p className="eyebrow">Pricing</p>
           <h2 className="mt-4 text-4xl font-semibold text-navy sm:text-5xl">
-            Garment care, on retainer.
+            Simple pricing. No subscription required.
           </h2>
           <p className="mt-5 text-base leading-relaxed text-charcoal/70">
-            Join as a member for priority service, members&apos; pricing and a
-            wardrobe that simply takes care of itself.
+            Pay per item, with collection and delivery taken care of. Become a member
+            for free delivery and members&apos; pricing — but you never have to.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-3">
-          {tiers.map((tier) => (
+        <div className="mx-auto mt-14 max-w-3xl rounded-sm border border-navy/10 bg-white p-8 sm:p-10">
+          <p className="eyebrow mb-6 text-center">Representative pricing</p>
+          <dl className="grid gap-x-12 gap-y-1 sm:grid-cols-2">
+            {priceList.map((row) => (
+              <div
+                key={row.item}
+                className="flex items-baseline justify-between border-b border-navy/10 py-3"
+              >
+                <dt className="text-sm text-charcoal/80">{row.item}</dt>
+                <dd className="font-serif text-lg font-semibold text-navy">from {row.price}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-6 text-center text-xs text-charcoal/45">
+            A selection of our most-requested items. Final pricing is confirmed before any cleaning begins.
+          </p>
+        </div>
+
+        <div className="mx-auto mt-14 grid max-w-4xl gap-8 lg:grid-cols-2">
+          {plans.map((plan) => (
             <div
-              key={tier.name}
+              key={plan.name}
               className={`relative flex flex-col rounded-sm border p-8 ${
-                tier.featured
-                  ? "border-gold bg-navy text-cream shadow-xl lg:-mt-4 lg:mb-4"
+                plan.featured
+                  ? "border-gold bg-navy text-cream shadow-xl"
                   : "border-navy/12 bg-white text-charcoal"
               }`}
             >
-              {tier.featured && (
+              {plan.featured && (
                 <span className="absolute right-6 top-6 rounded-full bg-gold px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-navy">
-                  Popular
+                  Most popular
                 </span>
               )}
-              <h3 className={`text-2xl font-semibold ${tier.featured ? "text-cream" : "text-navy"}`}>
-                {tier.name}
+              <h3 className={`text-2xl font-semibold ${plan.featured ? "text-cream" : "text-navy"}`}>
+                {plan.name}
               </h3>
-              <p className={`mt-1 text-sm ${tier.featured ? "text-cream/70" : "text-charcoal/60"}`}>
-                {tier.tagline}
+              <p className={`mt-1 text-sm ${plan.featured ? "text-cream/70" : "text-charcoal/60"}`}>
+                {plan.tagline}
               </p>
               <p className="mt-6">
-                <span className={`font-serif text-5xl font-semibold ${tier.featured ? "text-gold" : "text-navy"}`}>
-                  {tier.price}
+                <span className={`font-serif text-5xl font-semibold ${plan.featured ? "text-gold" : "text-navy"}`}>
+                  {plan.price}
                 </span>
-                <span className={`text-sm ${tier.featured ? "text-cream/60" : "text-charcoal/50"}`}> / month</span>
+                <span className={`ml-1 text-sm ${plan.featured ? "text-cream/60" : "text-charcoal/50"}`}>{plan.cadence}</span>
               </p>
 
-              <ul className={`mt-8 space-y-3 text-sm ${tier.featured ? "text-cream/85" : "text-charcoal/75"}`}>
-                {tier.features.map((feature) => (
+              <ul className={`mt-8 flex-1 space-y-3 text-sm ${plan.featured ? "text-cream/85" : "text-charcoal/75"}`}>
+                {plan.features.map((feature) => (
                   <li key={feature} className="flex gap-3">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2" className="mt-0.5 shrink-0">
                       <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
@@ -296,16 +315,16 @@ function Membership() {
 
               <a
                 href="#book"
-                className={`mt-8 ${tier.featured ? "btn-primary" : "btn-outline-dark"} w-full`}
+                className={`mt-8 ${plan.featured ? "btn-primary" : "btn-outline-dark"} w-full`}
               >
-                Become a Member
+                {plan.cta}
               </a>
             </div>
           ))}
         </div>
 
         <p className="mt-8 text-center text-xs text-charcoal/45">
-          Indicative launch pricing. Final tiers and benefits confirmed at sign-up.
+          Indicative launch pricing. Membership can be cancelled anytime.
         </p>
       </div>
     </section>
@@ -385,7 +404,7 @@ export default function Home() {
       <HowItWorks />
       <Services />
       <Quote />
-      <Membership />
+      <Pricing />
       <Coverage />
       <Booking />
     </>
