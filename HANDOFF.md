@@ -186,6 +186,9 @@ add a spam filter — the webhook currently accepts requests from anywhere.
 The booking pipeline is **Phase 1** of running most of the business on n8n with
 human-in-the-loop (HITL) approvals via Telegram buttons.
 
+**📋 Full detailed plan (9-area map, all phases, integrations):**
+[`docs/13-tech/automation-plan.md`](docs/13-tech/automation-plan.md)
+
 **Phase 1 — Booking pipeline (DONE & live):**
 `Website /book → webhook → Normalize → ensure table → INSERT (Postgres) → Telegram alert → respond {ok:true}`.
 Credentials: Postgres = "Postgres account"; Telegram = the @Thegarmentconciergebot bot.

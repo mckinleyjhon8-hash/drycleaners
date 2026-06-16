@@ -56,8 +56,10 @@ dry_cleaners_business/
 The `/book` form POSTs to an **n8n** webhook (hosted on Railway) that saves each
 booking to Postgres and sends an instant Telegram alert to the founder. Nothing
 dynamic runs on the website host — it's 100% static, so it can deploy anywhere.
-The pipeline and the Phase 2–5 automation roadmap are documented in
-[`HANDOFF.md`](HANDOFF.md) §9.
+The full automation blueprint — the 9-area map, all phases, HITL gates, and the
+integrations each needs — is in
+[`docs/13-tech/automation-plan.md`](docs/13-tech/automation-plan.md)
+(quick summary in [`HANDOFF.md`](HANDOFF.md) §9).
 
 ## Brand quick reference
 
