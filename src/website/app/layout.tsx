@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans, Playfair_Display } from "next/font/google";
 import Header from "@/components/Header";
 import Logo from "@/components/Logo";
+import WhatsAppButton, { WHATSAPP_HREF } from "@/components/WhatsAppButton";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -99,7 +100,7 @@ function Footer() {
             <p className="eyebrow text-gold">Contact</p>
             <ul className="mt-4 space-y-2 text-sm">
               <li><a className="hover:text-gold" href="mailto:hello@thegarmentconcierge.co.uk">hello@thegarmentconcierge.co.uk</a></li>
-              <li><a className="hover:text-gold" href="tel:+441908000000">01908 000 000</a></li>
+              <li><a className="hover:text-gold" href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer">WhatsApp us</a></li>
               <li className="text-cream/60">Milton Keynes, MK1–MK19</li>
             </ul>
           </div>
@@ -130,6 +131,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   );

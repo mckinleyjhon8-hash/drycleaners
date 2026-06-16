@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BookingForm from "@/components/BookingForm";
+import { WHATSAPP_HREF } from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
   title: "Book a Collection",
@@ -20,6 +21,18 @@ export default function BookPage() {
             Tell us where you are and what needs caring for. Our concierge team will
             confirm your collection window and pricing — usually the same day. No payment
             is taken at the time of booking.
+          </p>
+          <p className="mt-5 text-sm text-cream/60">
+            Prefer to chat?{" "}
+            <a
+              href={WHATSAPP_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-gold underline-offset-4 hover:underline"
+            >
+              Message us on WhatsApp
+            </a>
+            .
           </p>
         </div>
       </section>
