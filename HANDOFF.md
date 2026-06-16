@@ -1,63 +1,62 @@
 # The Garment Concierge — Project Handoff & Progress Log
 
-**Last updated:** 2026-06-13
+**Last updated:** 2026-06-16
 **Purpose:** Pick this project up on any device or account. Read this top to bottom
 and you'll know exactly where things stand and how to continue — whether "you" is
 the founder on a new laptop or a fresh Claude Code session.
 
 ---
 
-## 0. TL;DR — Resume in 5 steps
+## 0. TL;DR — Resume in 4 steps
 
-1. **Clone the repo** (everything except secrets is here):
+1. **Clone the repo:**
    ```
    git clone https://github.com/mckinleyjhon8-hash/drycleaners.git
    cd drycleaners
    ```
-2. **Install Node.js LTS** if the machine doesn't have it (https://nodejs.org).
-   Check with `node -v` (need v18.18+; this project was built on v24).
+2. **Install Node.js LTS** if missing (https://nodejs.org). Need v18.18+ (built on v24).
 3. **Install dependencies:**
    ```
    npm --prefix src/website install
    ```
-4. **Recreate the secret file** `src/website/.env.local` (it is git-ignored, so it
-   is NOT in the clone). Put this one line in it:
-   ```
-   NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=0977fe50-67cf-49da-8c45-d4794883bcc9
-   ```
-   (This is a Web3Forms *public* access key — safe to expose, but you can rotate it
-   at https://web3forms.com if you ever want to.)
-5. **Run it:**
+4. **Run it:**
    ```
    npm --prefix src/website run dev
    ```
    Open http://localhost:3000.
+
+> **No secret file is required to run it.** The booking form posts to the n8n
+> webhook, whose URL is baked into the code as a default. (Optional: create
+> `src/website/.env.local` with `NEXT_PUBLIC_N8N_BOOKING_WEBHOOK=...` only to
+> override that URL — e.g. if the n8n instance moves.)
 
 ---
 
 ## 1. What this project is
 
 **The Garment Concierge** — a luxury dry-cleaning **concierge & logistics** business
-for Milton Keynes, UK. The company does *not* clean clothes; it collects garments,
-manages the customer experience, sub-contracts cleaning to established local cleaners,
-and delivers back. Premium positioning ("The Harrods of Garment Care").
+for Milton Keynes, UK. It does *not* clean clothes; it collects garments, manages the
+customer experience, sub-contracts cleaning to established local cleaners, and delivers
+back. Premium positioning ("The Harrods of Garment Care").
 
-Full business brief, market data, brand system, and metrics live in **`CLAUDE.md`**.
+Full business brief, market data, brand system, metrics → **`CLAUDE.md`**.
 
 ---
 
-## 2. Current status (as of 2026-06-14)
+## 2. Current status (as of 2026-06-16)
 
 | Area | Status |
 |------|--------|
-| Git repo | ✅ On GitHub: https://github.com/mckinleyjhon8-hash/drycleaners (branch `main`) |
-| Marketing website | ✅ Built — Next.js 14, fully static, production build passes |
-| Booking form | ✅ Working & tested — submits via Web3Forms, emails land in inbox |
-| Favicon / SEO | ✅ Done (navy/gold hanger icon, metadata, mobile nav) |
-| Pricing | ✅ Per-order + £19.99/mo membership; full price list live (carousel) |
-| Deployment (Vercel) | ⏳ NOT deployed yet — see §6 |
-| Real domain / email / phone | ⏳ To be purchased by founder |
-| Dry cleaner contracts | ⏳ To be negotiated (candidate list in `CLAUDE.md`) |
+| Git repo | ✅ GitHub: https://github.com/mckinleyjhon8-hash/drycleaners (`main`) |
+| Marketing website | ✅ Next.js 14, **fully static**, production build passes |
+| Pages | ✅ `/` (landing) + `/book` (full booking form) |
+| Pricing | ✅ Per-order + **£19.99/mo** membership; **.99 charm pricing**; swipeable price carousel |
+| Imagery | ✅ Hero (garments on hangers) + cuff-detail quote band; hanger favicon |
+| Booking backend | ✅ **n8n pipeline** (webhook → Postgres + Telegram alert) — replaces Web3Forms. **Live & tested** |
+| Domain | ✅ **thegarmentconcierge.co.uk** purchased |
+| Pro email / phone | ⏳ In progress (founder) |
+| Deployment | ⏳ NOT deployed. **Recommended host: Cloudflare Pages** (see §6) |
+| Dry-cleaner contracts | ⏳ To negotiate (shortlist in `CLAUDE.md`) |
 
 **The site is built and works locally. It is not yet live on the internet.**
 
@@ -70,104 +69,135 @@ dry_cleaners_business/
 ├── CLAUDE.md              ← master business brief (positioning, market, brand, partners)
 ├── README.md             ← project overview
 ├── HANDOFF.md            ← this file
-├── docs/                 ← business documentation
+├── docs/
 │   ├── 01-market-research/market-analysis.md
 │   ├── 02-customer-avatars/customer-personas.md
-│   ├── 06-pricing/pricing-model.md   ← pricing & margins (per-order + membership)
+│   ├── 06-pricing/pricing-model.md   ← pricing & margins (full item table)
 │   └── 07-financials/financial-model.md
 │   └── (other sections: scaffolded, awaiting content)
-└── src/website/          ← THE WEBSITE
+└── src/website/          ← THE WEBSITE (Next.js, fully static)
     ├── app/
-    │   ├── page.tsx       ← entire landing page (all sections)
-    │   ├── layout.tsx     ← fonts, SEO metadata, header + footer
-    │   ├── globals.css    ← styling / brand colours
-    │   └── icon.svg       ← hanger favicon
+    │   ├── page.tsx              ← landing page (all sections)
+    │   ├── book/page.tsx         ← /book — full booking form page
+    │   ├── layout.tsx            ← fonts, SEO metadata, header + footer
+    │   ├── globals.css           ← styling / brand colours
+    │   └── icon.svg              ← hanger favicon
     ├── components/
-    │   ├── BookingForm.tsx← booking form (Web3Forms client-side submit)
-    │   ├── Header.tsx     ← sticky nav + mobile menu
-    │   ├── Logo.tsx       ← hanger + wordmark lockup
-    │   └── PriceCarousel.tsx ← swipeable price list (Pricing section)
-    ├── .env.local         ← SECRET, git-ignored (recreate per §0 step 4)
-    ├── .env.example       ← template showing which env vars are needed
+    │   ├── BookingForm.tsx       ← full booking form → POSTs JSON to the n8n webhook
+    │   ├── Header.tsx            ← sticky nav + mobile menu
+    │   ├── Logo.tsx              ← hanger + wordmark lockup
+    │   └── PriceCarousel.tsx     ← swipeable 3-category price list
+    ├── public/images/           ← hero-garments.jpg, cuff-detail.jpg
+    ├── .env.example             ← documents the optional n8n webhook override var
     └── (package.json, tailwind.config.ts, etc.)
 ```
 
-`node_modules/` and `.next/` are auto-generated — never edit, never commit (already git-ignored).
+`node_modules/` and `.next/` are auto-generated — never edit, never commit (git-ignored).
 
 ---
 
 ## 4. Tech stack & brand
 
-- **Framework:** Next.js 14.2.35 (App Router) + TypeScript + Tailwind CSS. Fully static.
-- **Booking:** Web3Forms (form posts from the browser; key in `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`).
+- **Framework:** Next.js 14.2.35 (App Router) + TypeScript + Tailwind. **100% static** — every route prerenders to HTML; no SSR/ISR/API routes.
+- **Booking backend:** the `/book` form POSTs JSON straight to the **n8n webhook** (on Railway), which saves to Postgres + sends a Telegram alert. Nothing dynamic runs on the website host. URL via `NEXT_PUBLIC_N8N_BOOKING_WEBHOOK` (has a built-in default).
 - **Brand colours:** Navy `#1B2B4B`, Cream `#F5F0E8`, Gold `#C9A84C`, Charcoal `#2D2D2D`.
 - **Fonts:** Cormorant Garamond (headings), DM Sans (body), Playfair Display (accents).
-- **Commands:** `npm --prefix src/website run dev` (preview) · `... run build` (verify build).
+- **Commands:** `npm --prefix src/website run dev` · `... run build`.
 
 ---
 
-## 5. Key decisions & gotchas (so they're not re-discovered the hard way)
+## 5. Key decisions & gotchas
 
-- **Booking is client-side on purpose.** A server-side proxy to Web3Forms was tried
-  first but Cloudflare (which fronts Web3Forms) blocks server-to-server calls with a
-  "Just a moment…" challenge. A real browser passes it, so the form submits directly
-  from the browser. Don't re-introduce a server proxy for Web3Forms.
-- **Web3Forms key is public by design.** It's a `NEXT_PUBLIC_` var (visible in the
-  page). To prevent abuse, lock it to your domain in the Web3Forms dashboard. A
-  honeypot field is already in the form to cut spam.
-- **Next.js was pinned to a patched version** (14.2.35) because 14.2.15 had a known
-  security advisory. Keep it patched.
-- **The app is in a subfolder** (`src/website`), NOT the repo root. This matters for
-  deployment (see §6).
-- **Secrets policy:** never commit `.env*` files. The repo `.gitignore` enforces this
-  (a `.gitignore` exception keeps `.env.example` tracked, since it has no real values).
-- **Pricing model:** per-order markup + an optional £19.99/mo membership — NOT
-  all-you-can-eat bundles (wrong fit for lumpy dry-clean demand). ~55% gross margin
-  per item over an assumed 30% cleaner trade rate. Prices use .99 charm endings.
+- **Booking backend is n8n, not Web3Forms.** The form was originally on Web3Forms
+  (email only); it now POSTs JSON to an n8n webhook that (a) saves the booking to
+  Postgres and (b) sends an instant Telegram alert. This gives a real, queryable
+  bookings database + extensible automation. See §9.
+- **Site is 100% static → not locked to any host.** All dynamic/background work is
+  offloaded to n8n. **Recommended host: Cloudflare Pages** (unlimited bandwidth/requests
+  on free, *commercial use allowed*, free domain + HTTPS). Vercel works too but its
+  **Hobby plan is officially non-commercial** — the real reason to prefer Cloudflare.
+- **Don't reach for `next/image`** — we use plain `<img>` on purpose to stay out of
+  Vercel's metered Image Optimisation. Images are tiny and pre-sized.
+- **Pricing model:** per-order markup + optional **£19.99/mo** membership — NOT
+  all-you-can-eat bundles (wrong fit for lumpy demand). ~55% gross margin per item
+  over an assumed **30% cleaner trade rate**. Prices use **.99** charm endings.
   Full model: `docs/06-pricing/pricing-model.md`.
+- **Next.js pinned to a patched version** (14.2.35; 14.2.15 had a security advisory).
+- **App is in a subfolder** (`src/website`), NOT repo root — matters for deployment.
+- **Secrets policy:** never commit `.env*` (gitignored; a `!` exception keeps
+  `.env.example` tracked). Web3Forms is retired — its old key is no longer used.
 
 ---
 
-## 6. Next step when ready: Deploy to Vercel
+## 6. Next step when ready: Deploy to Cloudflare Pages
 
-The site is ready to deploy. Recommended path (one-time setup via dashboard):
+The site is fully static, so hosting is simple. **Recommended: Cloudflare Pages.**
 
-1. https://vercel.com/new → **Import Git Repository** → `mckinleyjhon8-hash/drycleaners`
-2. In **Configure Project**:
-   - **Root Directory** → Edit → select **`src/website`** ← critical (app isn't at repo root)
-   - Framework Preset → should auto-detect **Next.js**
-   - **Environment Variables** → add `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` = `0977fe50-67cf-49da-8c45-d4794883bcc9`
-3. **Deploy** → you get a `*.vercel.app` URL; every push to `main` then auto-deploys.
+1. https://dash.cloudflare.com → **Workers & Pages → Create → Pages → Connect to Git**
+2. Pick `mckinleyjhon8-hash/drycleaners`.
+3. Build settings:
+   - **Root directory** → `src/website`
+   - **Framework preset** → Next.js (static) — or build `npm run build`
+   - (No env vars required — the webhook URL has a default.)
+4. Deploy → you get a `*.pages.dev` URL; add the custom domain `thegarmentconcierge.co.uk`.
 
-A Vercel MCP was connected and can trigger deploys / read build logs, but it cannot
-set the Root Directory or env var — so the first-time setup must be done in the
-dashboard as above. After that, redeploys can be automated.
+> Because the app has **no server features**, it can also be `output: 'export'`-ed to
+> pure static files and hosted on *any* static host (Netlify, GitHub Pages, etc.).
+> Vercel remains an option (a Vercel MCP is connected) but mind the non-commercial
+> Hobby terms.
+
+**Before going public**, harden the n8n webhook (see §9): lock CORS to the domain and
+add a spam filter — the webhook currently accepts requests from anywhere.
 
 ---
 
-## 7. Pending TO-DO (founder's real-world tasks)
+## 7. Pending TO-DO
 
-- [ ] Buy a **domain** (e.g. thegarmentconcierge.co.uk / .com)
-- [ ] Set up a **professional email** (e.g. hello@yourdomain via Google Workspace)
-- [ ] Get a **business phone number**
-- [ ] Identify & **negotiate with actual dry cleaners** — candidate list is in `CLAUDE.md`
-      (priority anchor: **Stony Dry Cleaners**, Stony Stratford MK11 1SY, B2B-ready)
-- [ ] Once domain/email/phone exist → **swap the placeholders** in the site:
-  - Footer & booking section: `hello@thegarmentconcierge.co.uk`, `01908 000 000`
-  - Company registration line in the footer
-  - Confirm item prices once the cleaner **trade rate** is negotiated — model in `docs/06-pricing/pricing-model.md`
-- [ ] **Deploy to Vercel** (§6)
+- [x] Buy domain — **thegarmentconcierge.co.uk** ✅
+- [x] Booking pipeline (website → n8n → Postgres + Telegram) ✅
+- [ ] Finish **pro email + phone** setup
+- [ ] **Swap placeholders** once email/phone exist: footer + booking contact
+      (`hello@thegarmentconcierge.co.uk`, `01908 000 000`), company registration line
+- [ ] **Negotiate cleaner trade rate** (Fluff & Tumble + One Stop) — confirms every margin
+- [ ] **Deploy to Cloudflare Pages** (§6) + point the domain at it
+- [ ] **Harden n8n webhook** before launch: CORS → domain, drop filled `botcheck`
+- [ ] Delete the 2 test rows (id 1, 2) from `garment_concierge.bookings`
+- [ ] **n8n Phase 2+** automations (see §9)
 
 ---
 
 ## 8. Important references
 
-- **Live repo:** https://github.com/mckinleyjhon8-hash/drycleaners
-- **Web3Forms dashboard:** https://web3forms.com (manage key, see submissions, lock to domain)
-- **Web3Forms access key:** `0977fe50-67cf-49da-8c45-d4794883bcc9` (public-by-design)
-- **Business brief:** `CLAUDE.md` (includes the dry-cleaner partner shortlist)
-- **Pricing model & margins:** `docs/06-pricing/pricing-model.md`
-- **Market research / personas / financials:** `docs/`
+- **Repo:** https://github.com/mckinleyjhon8-hash/drycleaners
+- **Domain:** thegarmentconcierge.co.uk
+- **n8n workflow:** "Garment Concierge — Booking Pipeline" — ID `aakDnEb6686k49tO`
+  → https://primary-production-68f72.up.railway.app/workflow/aakDnEb6686k49tO
+- **Production webhook:** `https://primary-production-68f72.up.railway.app/webhook/garment-booking` (POST)
+- **Database:** Railway Postgres → schema `garment_concierge`, table `bookings`
+  (id, created_at, status + 15 booking fields)
+- **Telegram alert:** chat `5827717998` (Musti / @Jay18732) via bot **@Thegarmentconciergebot**
+- **Pricing model:** `docs/06-pricing/pricing-model.md`
+- **Business brief / market / personas / financials:** `CLAUDE.md`, `docs/`
+
+---
+
+## 9. n8n automation
+
+The booking pipeline is **Phase 1** of running most of the business on n8n with
+human-in-the-loop (HITL) approvals via Telegram buttons.
+
+**Phase 1 — Booking pipeline (DONE & live):**
+`Website /book → webhook → Normalize → ensure table → INSERT (Postgres) → Telegram alert → respond {ok:true}`.
+Credentials: Postgres = "Postgres account"; Telegram = the @Thegarmentconciergebot bot.
+
+**Hardening still to do:** lock webhook CORS to `thegarmentconcierge.co.uk`; add a
+node to drop submissions where the `botcheck` honeypot is filled.
+
+**Roadmap (Phases 2–5), each plugs into the same Postgres spine:**
+2. Scheduling — day-before reminders, daily route list by area (HITL: approve route)
+3. Cleaner handoff — split items by best partner (F&T everyday / One Stop specialist), notify, status tracking
+4. Payments/membership — *needs Stripe* — invoice draft (HITL: approve), payment link, dunning, renewals
+5. CRM/retention + AI support — profiles/LTV, review requests, AI-drafted replies (HITL: send)
 
 ---
 
