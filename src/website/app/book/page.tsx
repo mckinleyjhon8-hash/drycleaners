@@ -31,6 +31,10 @@ export default function BookPage() {
               className="font-medium text-gold underline-offset-4 hover:underline"
             >
               Message us on WhatsApp
+            </a>{" "}
+            or call{" "}
+            <a href="tel:+441908103315" className="font-medium text-gold underline-offset-4 hover:underline">
+              01908 103315
             </a>
             .
           </p>

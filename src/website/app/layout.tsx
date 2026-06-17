@@ -100,6 +100,7 @@ function Footer() {
             <p className="eyebrow text-gold">Contact</p>
             <ul className="mt-4 space-y-2 text-sm">
               <li><a className="hover:text-gold" href="mailto:hello@thegarmentconcierge.co.uk">hello@thegarmentconcierge.co.uk</a></li>
+              <li><a className="hover:text-gold" href="tel:+441908103315">01908 103315</a></li>
               <li><a className="hover:text-gold" href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer">WhatsApp us</a></li>
               <li className="text-cream/60">Milton Keynes, MK1–MK19</li>
             </ul>

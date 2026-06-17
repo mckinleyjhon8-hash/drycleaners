@@ -54,7 +54,7 @@ Full business brief, market data, brand system, metrics → **`CLAUDE.md`**.
 | Imagery | ✅ Hero (garments on hangers) + cuff-detail quote band; hanger favicon |
 | Booking backend | ✅ **n8n pipeline** (webhook → Postgres + Telegram alert) — replaces Web3Forms. **Live & tested** |
 | Domain | ✅ **thegarmentconcierge.co.uk** purchased |
-| Pro email / phone | ⏳ In progress (founder) |
+| Pro email / phone | ✅ `hello@` + `01908 103315` (Twilio MK landline) — live on the site |
 | Deployment | ⏳ NOT deployed. **Recommended host: Cloudflare Pages** (see §6) |
 | Dry-cleaner contracts | ⏳ To negotiate (shortlist in `CLAUDE.md`) |
 
@@ -155,9 +155,8 @@ add a spam filter — the webhook currently accepts requests from anywhere.
 
 - [x] Buy domain — **thegarmentconcierge.co.uk** ✅
 - [x] Booking pipeline (website → n8n → Postgres + Telegram) ✅
-- [ ] Finish **pro email + phone** setup
-- [ ] **Swap placeholders** once email/phone exist: footer + booking contact
-      (`hello@thegarmentconcierge.co.uk`, `01908 000 000`), company registration line
+- [x] Pro **email + phone** — `hello@thegarmentconcierge.co.uk` + `01908 103315` ✅
+- [ ] **Swap remaining placeholder:** company registration line in the footer (once the Ltd is formed)
 - [ ] **Negotiate cleaner trade rate** (Fluff & Tumble + One Stop) — confirms every margin
 - [ ] **Deploy to Cloudflare Pages** (§6) + point the domain at it
 - [ ] **Harden n8n webhook** before launch: CORS → domain, drop filled `botcheck`
