@@ -53,9 +53,13 @@ Website /book form → n8n webhook → Normalize fields → Ensure table
 - **Telegram alert:** chat `5827717998` (Musti / @Jay18732) via bot **@Thegarmentconciergebot**
 - **Status:** built, tested end-to-end, published & live.
 
-### Phase 1.1 — hardening (do before public launch)
-- Lock webhook **CORS** to `thegarmentconcierge.co.uk` (currently open to all).
-- Add a node to **drop submissions where the `botcheck` honeypot is filled** (spam).
+### Phase 1.1 — hardening
+- ✅ **Spam filter LIVE** — a Filter node ("Drop Spam") bins any submission with the
+  `botcheck` honeypot filled, or missing email/postcode, **before** it reaches Postgres
+  or Telegram. Verified: spam stops at the filter (33 ms); legit passes through.
+- ⏳ **At deploy:** lock webhook CORS to the live origin **+** add **Cloudflare Turnstile**
+  (invisible CAPTCHA) for strong bot protection. (CORS alone is weak — n8n still runs the
+  workflow for a disallowed origin; it only blocks the browser reading the response.)
 
 ---
 

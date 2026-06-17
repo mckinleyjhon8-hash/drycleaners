@@ -159,7 +159,8 @@ add a spam filter — the webhook currently accepts requests from anywhere.
 - [ ] **Swap remaining placeholder:** company registration line in the footer (once the Ltd is formed)
 - [ ] **Negotiate cleaner trade rate** (Fluff & Tumble + One Stop) — confirms every margin
 - [ ] **Deploy to Cloudflare Pages** (§6) + point the domain at it
-- [ ] **Harden n8n webhook** before launch: CORS → domain, drop filled `botcheck`
+- [x] **n8n spam filter** — drops honeypot/invalid bookings before DB + Telegram ✅
+- [ ] **At deploy:** lock webhook CORS to the live origin + add **Cloudflare Turnstile** (CAPTCHA)
 - [ ] Delete the 2 test rows (id 1, 2) from `garment_concierge.bookings`
 - [ ] **n8n Phase 2+** automations (see §9)
 
@@ -192,8 +193,8 @@ human-in-the-loop (HITL) approvals via Telegram buttons.
 `Website /book → webhook → Normalize → ensure table → INSERT (Postgres) → Telegram alert → respond {ok:true}`.
 Credentials: Postgres = "Postgres account"; Telegram = the @Thegarmentconciergebot bot.
 
-**Hardening still to do:** lock webhook CORS to `thegarmentconcierge.co.uk`; add a
-node to drop submissions where the `botcheck` honeypot is filled.
+**Hardening:** ✅ spam filter live (drops honeypot/invalid submissions before DB +
+Telegram). At deploy: lock CORS to the live origin + add Cloudflare Turnstile.
 
 **Roadmap (Phases 2–5), each plugs into the same Postgres spine:**
 2. Scheduling — day-before reminders, daily route list by area (HITL: approve route)
