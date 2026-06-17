@@ -1,6 +1,6 @@
 # The Garment Concierge — Project Handoff & Progress Log
 
-**Last updated:** 2026-06-16
+**Last updated:** 2026-06-17
 **Purpose:** Pick this project up on any device or account. Read this top to bottom
 and you'll know exactly where things stand and how to continue — whether "you" is
 the founder on a new laptop or a fresh Claude Code session.
@@ -43,7 +43,7 @@ Full business brief, market data, brand system, metrics → **`CLAUDE.md`**.
 
 ---
 
-## 2. Current status (as of 2026-06-16)
+## 2. Current status (as of 2026-06-17)
 
 | Area | Status |
 |------|--------|
@@ -53,12 +53,14 @@ Full business brief, market data, brand system, metrics → **`CLAUDE.md`**.
 | Pricing | ✅ Per-order + **£19.99/mo** membership; **.99 charm pricing**; swipeable price carousel |
 | Imagery | ✅ Hero (garments on hangers) + cuff-detail quote band; hanger favicon |
 | Booking backend | ✅ **n8n pipeline** (webhook → Postgres + Telegram alert) — replaces Web3Forms. **Live & tested** |
-| Domain | ✅ **thegarmentconcierge.co.uk** purchased |
+| Domain | ✅ **thegarmentconcierge.co.uk** — live, DNS on Cloudflare, SSL active |
 | Pro email / phone | ✅ `hello@` + `01908 103315` (Twilio MK landline) — live on the site |
-| Deployment | ⏳ NOT deployed. **Recommended host: Cloudflare Pages** (see §6) |
+| Deployment | ✅ **LIVE → https://thegarmentconcierge.co.uk** (Cloudflare, static assets on a Worker) |
+| Webhook security | ✅ Spam filter + **CORS locked** to the live domain (apex + www) |
 | Dry-cleaner contracts | ⏳ To negotiate (shortlist in `CLAUDE.md`) |
 
-**The site is built and works locally. It is not yet live on the internet.**
+**The site is LIVE at https://thegarmentconcierge.co.uk** — deployed on Cloudflare,
+with the booking pipeline and CORS lock live in production.
 
 ---
 
@@ -129,9 +131,15 @@ dry_cleaners_business/
 
 ---
 
-## 6. Next step when ready: Deploy to Cloudflare Pages
+## 6. Deployment — ✅ DONE (Cloudflare)
 
-The site is fully static, so hosting is simple. **Recommended: Cloudflare Pages.**
+**The site is live at https://thegarmentconcierge.co.uk.** It was built as a static
+export (`output: 'export'` → `src/website/out`) and deployed to **Cloudflare** as a
+Worker serving static assets; DNS + SSL are on Cloudflare.
+
+*To redeploy after changes:* `npm --prefix src/website run build`, then upload the new
+`src/website/out` folder — or connect the GitHub repo for auto-deploys (root directory
+`src/website`; the `output:'export'` config is already committed). Original setup notes:
 
 1. https://dash.cloudflare.com → **Workers & Pages → Create → Pages → Connect to Git**
 2. Pick `mckinleyjhon8-hash/drycleaners`.
@@ -146,8 +154,8 @@ The site is fully static, so hosting is simple. **Recommended: Cloudflare Pages.
 > Vercel remains an option (a Vercel MCP is connected) but mind the non-commercial
 > Hobby terms.
 
-**Before going public**, harden the n8n webhook (see §9): lock CORS to the domain and
-add a spam filter — the webhook currently accepts requests from anywhere.
+**Hardening status:** ✅ spam filter live · ✅ CORS locked to the live domain.
+Optional next: add **Cloudflare Turnstile** (CAPTCHA) for stronger bot protection.
 
 ---
 
@@ -156,13 +164,16 @@ add a spam filter — the webhook currently accepts requests from anywhere.
 - [x] Buy domain — **thegarmentconcierge.co.uk** ✅
 - [x] Booking pipeline (website → n8n → Postgres + Telegram) ✅
 - [x] Pro **email + phone** — `hello@thegarmentconcierge.co.uk` + `01908 103315` ✅
-- [ ] **Swap remaining placeholder:** company registration line in the footer (once the Ltd is formed)
-- [ ] **Negotiate cleaner trade rate** (Fluff & Tumble + One Stop) — confirms every margin
-- [ ] **Deploy to Cloudflare Pages** (§6) + point the domain at it
+- [x] **Deploy + custom domain** — LIVE at https://thegarmentconcierge.co.uk (Cloudflare) ✅
 - [x] **n8n spam filter** — drops honeypot/invalid bookings before DB + Telegram ✅
-- [ ] **At deploy:** lock webhook CORS to the live origin + add **Cloudflare Turnstile** (CAPTCHA)
-- [ ] Delete the 2 test rows (id 1, 2) from `garment_concierge.bookings`
-- [ ] **n8n Phase 2+** automations (see §9)
+- [x] **Lock webhook CORS** to the live domain (apex + www) ✅
+- [ ] **Voice line:** upgrade Twilio off the trial account before giving the number to real customers (removes the "trial account" message callers hear)
+- [ ] **Enable Cloudflare Web Analytics** (cookieless) — dashboard toggle
+- [ ] Optional: add **Cloudflare Turnstile** (CAPTCHA) to the booking form
+- [ ] **Swap placeholder:** company registration line in the footer (once the Ltd is formed)
+- [ ] **Negotiate cleaner trade rate** (Fluff & Tumble + One Stop) — confirms every margin
+- [ ] Delete the test rows from `garment_concierge.bookings`
+- [ ] **n8n Phase 2+** automations (see §9) — *in progress*
 
 ---
 
@@ -193,8 +204,8 @@ human-in-the-loop (HITL) approvals via Telegram buttons.
 `Website /book → webhook → Normalize → ensure table → INSERT (Postgres) → Telegram alert → respond {ok:true}`.
 Credentials: Postgres = "Postgres account"; Telegram = the @Thegarmentconciergebot bot.
 
-**Hardening:** ✅ spam filter live (drops honeypot/invalid submissions before DB +
-Telegram). At deploy: lock CORS to the live origin + add Cloudflare Turnstile.
+**Hardening:** ✅ spam filter live · ✅ CORS locked to the live domain (apex + www).
+Optional next: Cloudflare Turnstile (CAPTCHA).
 
 **Roadmap (Phases 2–5), each plugs into the same Postgres spine:**
 2. Scheduling — day-before reminders, daily route list by area (HITL: approve route)

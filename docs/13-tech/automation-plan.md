@@ -1,7 +1,7 @@
 # Automation Plan — The Garment Concierge
 ## Running the business on n8n, with human-in-the-loop (HITL)
 
-**Last updated:** 2026-06-16
+**Last updated:** 2026-06-17
 **Goal:** automate ~70–80% of day-to-day operations, leaving a human in the loop only
 at the **money, quality, and trust** decisions.
 
@@ -57,9 +57,11 @@ Website /book form → n8n webhook → Normalize fields → Ensure table
 - ✅ **Spam filter LIVE** — a Filter node ("Drop Spam") bins any submission with the
   `botcheck` honeypot filled, or missing email/postcode, **before** it reaches Postgres
   or Telegram. Verified: spam stops at the filter (33 ms); legit passes through.
-- ⏳ **At deploy:** lock webhook CORS to the live origin **+** add **Cloudflare Turnstile**
-  (invisible CAPTCHA) for strong bot protection. (CORS alone is weak — n8n still runs the
-  workflow for a disallowed origin; it only blocks the browser reading the response.)
+- ✅ **CORS LOCKED** — the webhook `allowedOrigins` is set to `https://thegarmentconcierge.co.uk`
+  + `www` (was `*`) and published live; other origins are refused by the browser.
+- ⏳ **Optional:** add **Cloudflare Turnstile** (invisible CAPTCHA) for stronger bot
+  protection. (CORS alone is weak — n8n still runs the workflow for a disallowed origin;
+  it only blocks the browser from reading the response.)
 
 ---
 
