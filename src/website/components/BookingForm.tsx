@@ -217,7 +217,27 @@ export default function BookingForm() {
 
       <label className="flex items-start gap-3 text-sm text-charcoal/75">
         <input type="checkbox" name="consent" required value="Agreed" className="mt-0.5 h-4 w-4 shrink-0 accent-gold" />
-        <span>I agree to be contacted about my booking and accept the Terms &amp; Privacy Policy.</span>
+        <span>
+          I agree to be contacted about my booking and accept the{" "}
+          <a
+            href="/terms"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-gold-dark underline underline-offset-2"
+          >
+            Terms
+          </a>{" "}
+          &amp;{" "}
+          <a
+            href="/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-gold-dark underline underline-offset-2"
+          >
+            Privacy Policy
+          </a>
+          .
+        </span>
       </label>
 
       {error && (

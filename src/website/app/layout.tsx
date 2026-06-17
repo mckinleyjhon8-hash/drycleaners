@@ -52,12 +52,21 @@ export const metadata: Metadata = {
     siteName: "The Garment Concierge",
     locale: "en_GB",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "The Garment Concierge — luxury garment care in Milton Keynes",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "The Garment Concierge | Luxury Dry Cleaning in Milton Keynes",
     description:
       "White-glove garment care, collected and delivered across Milton Keynes.",
+    images: ["/og-image.png"],
   },
 };
 
@@ -110,9 +119,9 @@ function Footer() {
         <div className="mt-14 flex flex-col gap-4 border-t border-cream/15 pt-8 text-xs text-cream/50 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} The Garment Concierge. A trading name of a company registered in England &amp; Wales.</p>
           <div className="flex gap-6">
-            <a className="hover:text-gold" href="#">Terms</a>
-            <a className="hover:text-gold" href="#">Privacy</a>
-            <a className="hover:text-gold" href="#">Cookies</a>
+            <a className="hover:text-gold" href="/terms">Terms</a>
+            <a className="hover:text-gold" href="/privacy">Privacy</a>
+            <a className="hover:text-gold" href="/cookies">Cookies</a>
           </div>
         </div>
       </div>

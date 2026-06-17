@@ -50,4 +50,29 @@
   .hairline {
     @apply h-px w-12 bg-gold;
   }
+
+  .legal-prose > * + * {
+    @apply mt-3;
+  }
+
+  .legal-prose h2 {
+    @apply mt-10 text-xl font-semibold text-navy;
+  }
+
+  .legal-prose p,
+  .legal-prose li {
+    @apply text-sm leading-relaxed;
+  }
+
+  .legal-prose ul {
+    @apply mt-3 list-disc space-y-2 pl-5;
+  }
+
+  .legal-prose a {
+    @apply text-gold-dark underline underline-offset-4 hover:text-gold;
+  }
+
+  .legal-prose strong {
+    @apply font-semibold text-navy;
+  }
 }
