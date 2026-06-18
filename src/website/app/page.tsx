@@ -277,7 +277,7 @@ function Pricing() {
               }`}
             >
               {plan.featured && (
-                <span className="absolute right-6 top-6 rounded-full bg-gold px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-navy">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gold px-4 py-1 text-[10px] font-semibold uppercase tracking-widest text-navy shadow-md">
                   Most popular
                 </span>
               )}
