@@ -191,6 +191,8 @@ Optional next: add **Cloudflare Turnstile** (CAPTCHA) for stronger bot protectio
   - Daily Founder Digest — `MsYpdYGTtqMLzuvu` (7am Telegram brief)
   - Day-Before Reminder — `6Xf4vYUNwkUy78ee` (5pm → email tomorrow's confirmed collections)
   - New Member (Stripe) — `mSKD0zXGuMQfVYSZ` (Stripe webhook `/webhook/stripe-membership` → record member + welcome email + ping; **no Stripe key in n8n**)
+  - Daily Route List — `zsnDrsAoDyVKzfuy` (7:30am → today's confirmed collections grouped by area)
+  - Review Request — `7QWcpkRWmYGH7umq` (daily 11am → asks returned customers for a review, once)
   - ⚠️ After creating any workflow with a **Telegram** node, re-bind it to credential **"The Garment Concierge"** (`NZBHRkyNOKojXlGV`) — n8n auto-assigns the wrong bot ("Perfume guy").
 - **Production webhook:** `https://primary-production-68f72.up.railway.app/webhook/garment-booking` (POST)
 - **Database:** Railway Postgres → schema `garment_concierge`, table `bookings`

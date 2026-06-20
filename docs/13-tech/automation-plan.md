@@ -83,7 +83,8 @@ Each phase plugs into the same Postgres spine.
   preferred collections. Workflow `MsYpdYGTtqMLzuvu`.
 - ✅ **Day-Before Reminder** — 5pm; emails each customer whose booking is `confirmed` for
   collection tomorrow. Workflow `6Xf4vYUNwkUy78ee`.
-- ⏳ **Daily route list** grouped by area → HITL approve (next).
+- ✅ **Daily Route List** — 7:30am; today's confirmed collections grouped by area → founder
+  Telegram (silent when there are none). Workflow `zsnDrsAoDyVKzfuy`. *(Tap-to-approve HITL can be layered on.)*
 
 **Phase 3 — Cleaner handoff + status**
 - Split items by **best partner** (Fluff & Tumble everyday / One Stop specialist)
@@ -104,7 +105,7 @@ Each phase plugs into the same Postgres spine.
 
 **Phase 5 — CRM / retention + AI support**
 - Customer **profiles, history, LTV** in Postgres
-- Post-service **review / NPS** requests
+- ✅ Post-service **review request** — daily 11am; emails customers returned 2+ days ago, asks once (`review_requested` flag). Workflow `7QWcpkRWmYGH7umq`. *(NPS scoring + Google-review link to add.)*
 - **Lapsed-customer win-back**
 - Inbound support **triage + AI-drafted replies** → **HITL: send**
 
@@ -134,7 +135,7 @@ Each phase plugs into the same Postgres spine.
 ## 6. Data spine (Postgres)
 
 - **Schema:** `garment_concierge`
-- **Live table:** `bookings` — original fields (id, created_at, status, name, email, phone, address_line1/2, town, postcode, access_notes, service, turnaround, items, collection_date, time_window, membership, notes) **+ confirmation fields** (confirmed_collection_date, confirmed_window, confirmed_return_date, quoted_price, confirm_note, confirmed_at). Status flow: `new → confirmed → collected → ready → returned`.
+- **Live table:** `bookings` — original fields (id, created_at, status, name, email, phone, address_line1/2, town, postcode, access_notes, service, turnaround, items, collection_date, time_window, membership, notes) **+ confirmation fields** (confirmed_collection_date, confirmed_window, confirmed_return_date, quoted_price, confirm_note, confirmed_at, review_requested). Status flow: `new → confirmed → collected → ready → returned`.
 - **Live table:** `members` (id, created_at, status, name, email, stripe_customer_id, stripe_subscription_id, amount_total, currency) — populated by the Stripe membership webhook (`mSKD0zXGuMQfVYSZ`).
 - **Future tables:** `customers`, `orders`, `payments`, `routes`, `partners`
 
