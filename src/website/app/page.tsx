@@ -1,5 +1,11 @@
 import PriceCarousel from "@/components/PriceCarousel";
 
+// Stripe Payment Link for Concierge Membership.
+// Defaults to the TEST link — set NEXT_PUBLIC_STRIPE_MEMBER_LINK to the LIVE link before taking real payments.
+const MEMBER_CHECKOUT_URL =
+  process.env.NEXT_PUBLIC_STRIPE_MEMBER_LINK ??
+  "https://buy.stripe.com/test_14AdRagGCbgcbGcanudZ600";
+
 /* ----------------------------------------------------------------- data --- */
 
 const steps = [
@@ -306,7 +312,9 @@ function Pricing() {
               </ul>
 
               <a
-                href="/book"
+                href={plan.featured ? MEMBER_CHECKOUT_URL : "/book"}
+                target={plan.featured ? "_blank" : undefined}
+                rel={plan.featured ? "noopener noreferrer" : undefined}
                 className={`mt-8 ${plan.featured ? "btn-primary" : "btn-outline-dark"} w-full`}
               >
                 {plan.cta}
