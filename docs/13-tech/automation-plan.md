@@ -75,9 +75,15 @@ Each phase plugs into the same Postgres spine.
 - ✅ Customer **booking confirmation email** — **LIVE.** Sent via the **Gmail node** (HTTPS)
   from the dedicated "The Garment Concierge" Gmail; branded HTML, reply-to `hello@`, with a
   fail-safe so a mail issue never blocks a booking saving.
-- **Day-before collection reminder**
-- **Daily founder digest** — morning Telegram: today's collections, returns, revenue, issues *(uses Postgres + Telegram — no new integration)*
-- **Daily route list** grouped by area → **HITL: approve route**
+- ✅ **Confirm Booking** (HITL) — founder form (`/form/garment-confirm`) sets confirmed
+  collection/return dates, window, final price + note → booking becomes `confirmed`, the
+  customer is emailed the confirmed details, the founder is pinged. The booking alert now
+  carries the GC-ref + a Confirm link. Workflow `NrTUQ08I9UWxk1Jr`.
+- ✅ **Daily Founder Digest** — 7am Telegram brief: new bookings (24h), open count, today's
+  preferred collections. Workflow `MsYpdYGTtqMLzuvu`.
+- ✅ **Day-Before Reminder** — 5pm; emails each customer whose booking is `confirmed` for
+  collection tomorrow. Workflow `6Xf4vYUNwkUy78ee`.
+- ⏳ **Daily route list** grouped by area → HITL approve (next).
 
 **Phase 3 — Cleaner handoff + status**
 - Split items by **best partner** (Fluff & Tumble everyday / One Stop specialist)
@@ -123,7 +129,7 @@ Each phase plugs into the same Postgres spine.
 ## 6. Data spine (Postgres)
 
 - **Schema:** `garment_concierge`
-- **Live table:** `bookings` (id, created_at, status, name, email, phone, address_line1/2, town, postcode, access_notes, service, turnaround, items, collection_date, time_window, membership, notes)
+- **Live table:** `bookings` — original fields (id, created_at, status, name, email, phone, address_line1/2, town, postcode, access_notes, service, turnaround, items, collection_date, time_window, membership, notes) **+ confirmation fields** (confirmed_collection_date, confirmed_window, confirmed_return_date, quoted_price, confirm_note, confirmed_at). Status flow: `new → confirmed → collected → ready → returned`.
 - **Future tables:** `customers`, `orders`, `payments`, `memberships`, `routes`, `partners`
 
 ---

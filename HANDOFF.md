@@ -174,7 +174,8 @@ Optional next: add **Cloudflare Turnstile** (CAPTCHA) for stronger bot protectio
 - [ ] **Swap placeholder:** company registration line in the footer (once the Ltd is formed)
 - [ ] **Negotiate cleaner trade rate** (Fluff & Tumble + One Stop) — confirms every margin
 - [ ] Delete the test rows from `garment_concierge.bookings`
-- [ ] **n8n Phase 2+** automations (see §9) — *in progress*
+- [x] **n8n Phase 2** — Daily Founder Digest (7am), Confirm Booking (form + HITL), Day-Before Reminder (5pm) ✅
+- [ ] **n8n next:** daily route list, then **Phase 4 — Stripe membership** (sandbox ready)
 
 ---
 
@@ -182,8 +183,12 @@ Optional next: add **Cloudflare Turnstile** (CAPTCHA) for stronger bot protectio
 
 - **Repo:** https://github.com/mckinleyjhon8-hash/drycleaners
 - **Domain:** thegarmentconcierge.co.uk
-- **n8n workflow:** "Garment Concierge — Booking Pipeline" — ID `aakDnEb6686k49tO`
-  → https://primary-production-68f72.up.railway.app/workflow/aakDnEb6686k49tO
+- **n8n workflows** (host: https://primary-production-68f72.up.railway.app):
+  - Booking Pipeline — `aakDnEb6686k49tO` (webhook → Postgres + Telegram + confirmation email)
+  - Confirm Booking — `NrTUQ08I9UWxk1Jr` (form `/form/garment-confirm` → confirm + email customer + ping)
+  - Daily Founder Digest — `MsYpdYGTtqMLzuvu` (7am Telegram brief)
+  - Day-Before Reminder — `6Xf4vYUNwkUy78ee` (5pm → email tomorrow's confirmed collections)
+  - ⚠️ After creating any workflow with a **Telegram** node, re-bind it to credential **"The Garment Concierge"** (`NZBHRkyNOKojXlGV`) — n8n auto-assigns the wrong bot ("Perfume guy").
 - **Production webhook:** `https://primary-production-68f72.up.railway.app/webhook/garment-booking` (POST)
 - **Database:** Railway Postgres → schema `garment_concierge`, table `bookings`
   (id, created_at, status + 15 booking fields)
