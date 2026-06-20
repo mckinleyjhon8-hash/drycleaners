@@ -1,6 +1,6 @@
 # The Garment Concierge — Project Handoff & Progress Log
 
-**Last updated:** 2026-06-17
+**Last updated:** 2026-06-20
 **Purpose:** Pick this project up on any device or account. Read this top to bottom
 and you'll know exactly where things stand and how to continue — whether "you" is
 the founder on a new laptop or a fresh Claude Code session.
@@ -175,7 +175,9 @@ Optional next: add **Cloudflare Turnstile** (CAPTCHA) for stronger bot protectio
 - [ ] **Negotiate cleaner trade rate** (Fluff & Tumble + One Stop) — confirms every margin
 - [ ] Delete the test rows from `garment_concierge.bookings`
 - [x] **n8n Phase 2** — Daily Founder Digest (7am), Confirm Booking (form + HITL), Day-Before Reminder (5pm) ✅
-- [ ] **n8n next:** daily route list, then **Phase 4 — Stripe membership** (sandbox ready)
+- [x] **Stripe membership** (Phase 4) — Payment Link → n8n webhook → member recorded + welcome email + ping (sandbox, verified end-to-end) ✅
+- [ ] **Before live payments:** swap site to the LIVE Stripe Payment Link + add webhook signature verification
+- [ ] **n8n next:** daily route list; subscription cancellation/renewal handling
 
 ---
 
@@ -188,11 +190,13 @@ Optional next: add **Cloudflare Turnstile** (CAPTCHA) for stronger bot protectio
   - Confirm Booking — `NrTUQ08I9UWxk1Jr` (form `/form/garment-confirm` → confirm + email customer + ping)
   - Daily Founder Digest — `MsYpdYGTtqMLzuvu` (7am Telegram brief)
   - Day-Before Reminder — `6Xf4vYUNwkUy78ee` (5pm → email tomorrow's confirmed collections)
+  - New Member (Stripe) — `mSKD0zXGuMQfVYSZ` (Stripe webhook `/webhook/stripe-membership` → record member + welcome email + ping; **no Stripe key in n8n**)
   - ⚠️ After creating any workflow with a **Telegram** node, re-bind it to credential **"The Garment Concierge"** (`NZBHRkyNOKojXlGV`) — n8n auto-assigns the wrong bot ("Perfume guy").
 - **Production webhook:** `https://primary-production-68f72.up.railway.app/webhook/garment-booking` (POST)
 - **Database:** Railway Postgres → schema `garment_concierge`, table `bookings`
   (id, created_at, status + 15 booking fields)
 - **Telegram alert:** chat `5827717998` (Musti / @Jay18732) via bot **@Thegarmentconciergebot**
+- **Stripe** (sandbox "Dry cleaning sandbox"): Concierge Membership product `prod_UjzGHVi3UV9Cva` · price `price_1TkVHbLYz4gPC6dkCwS6gIfE` (£19.99/mo) · Payment Link `https://buy.stripe.com/test_14AdRagGCbgcbGcanudZ600` (**TEST**). Dashboard webhook (`checkout.session.completed`) → n8n `…/webhook/stripe-membership`. Go-live: swap to LIVE link + add signature verification.
 - **Pricing model:** `docs/06-pricing/pricing-model.md`
 - **Business brief / market / personas / financials:** `CLAUDE.md`, `docs/`
 

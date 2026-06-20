@@ -1,7 +1,7 @@
 # Automation Plan — The Garment Concierge
 ## Running the business on n8n, with human-in-the-loop (HITL)
 
-**Last updated:** 2026-06-17
+**Last updated:** 2026-06-20
 **Goal:** automate ~70–80% of day-to-day operations, leaving a human in the loop only
 at the **money, quality, and trust** decisions.
 
@@ -91,11 +91,16 @@ Each phase plugs into the same Postgres spine.
 - **Status tracking** (received → cleaning → ready) — driver/founder updates
 - QC checklist on return
 
-**Phase 4 — Payments + membership** — *needs Stripe*
-- **Invoice draft** from actual items → **HITL: approve**
-- Payment link + receipts
-- Failed-payment **dunning** → **HITL: escalation**
-- Membership **recurring billing** + renewal reminders + churn flags → **HITL: save**
+**Phase 4 — Payments + membership**
+- ✅ **Membership onboarding LIVE (sandbox)** — Stripe Payment Link (Concierge Membership,
+  £19.99/mo, product `prod_UjzGHVi3UV9Cva`) → Stripe webhook → n8n records the member in
+  `garment_concierge.members` → welcome email → founder ping. Workflow `mSKD0zXGuMQfVYSZ`.
+  Architecture: a plain n8n **Webhook** node (no Stripe key in n8n); the webhook endpoint is
+  registered in the Stripe dashboard. Site "Become a Member" button → the Payment Link.
+  **Go-live:** swap to the LIVE Payment Link + add webhook **signature verification**.
+- ⏳ Invoice draft from actual items → HITL approve · receipts
+- ⏳ Failed-payment dunning, renewal reminders, churn flags → HITL save
+- ⏳ Cancellation handling (`customer.subscription.deleted` → mark member inactive)
 
 **Phase 5 — CRM / retention + AI support**
 - Customer **profiles, history, LTV** in Postgres
@@ -113,7 +118,7 @@ Each phase plugs into the same Postgres spine.
 | Postgres (Railway) | ✅ | Data spine (`garment_concierge` schema) |
 | Telegram (@Thegarmentconciergebot) | ✅ | Founder alerts + HITL approvals |
 | Slack | ✅ (available) | Optional alternative notifier |
-| **Stripe** | ⏳ needed for Phase 4 | Payments, membership billing |
+| **Stripe** (sandbox "Dry cleaning sandbox") | ✅ membership LIVE (test) | Membership checkout (Payment Link) + recurring billing; webhook → n8n |
 | **Customer email** — **Gmail node** (HTTPS API) | ✅ LIVE | Booking confirmation emails (from the dedicated Garment Concierge Gmail) |
 | WhatsApp | Click-to-chat live on site (manual). **WhatsApp Business API via Twilio** = future automated channel | Fast customer response |
 
@@ -130,7 +135,8 @@ Each phase plugs into the same Postgres spine.
 
 - **Schema:** `garment_concierge`
 - **Live table:** `bookings` — original fields (id, created_at, status, name, email, phone, address_line1/2, town, postcode, access_notes, service, turnaround, items, collection_date, time_window, membership, notes) **+ confirmation fields** (confirmed_collection_date, confirmed_window, confirmed_return_date, quoted_price, confirm_note, confirmed_at). Status flow: `new → confirmed → collected → ready → returned`.
-- **Future tables:** `customers`, `orders`, `payments`, `memberships`, `routes`, `partners`
+- **Live table:** `members` (id, created_at, status, name, email, stripe_customer_id, stripe_subscription_id, amount_total, currency) — populated by the Stripe membership webhook (`mSKD0zXGuMQfVYSZ`).
+- **Future tables:** `customers`, `orders`, `payments`, `routes`, `partners`
 
 ---
 
