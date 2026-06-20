@@ -167,6 +167,7 @@ Optional next: add **Cloudflare Turnstile** (CAPTCHA) for stronger bot protectio
 - [x] **Deploy + custom domain** — LIVE at https://thegarmentconcierge.co.uk (Cloudflare) ✅
 - [x] **n8n spam filter** — drops honeypot/invalid bookings before DB + Telegram ✅
 - [x] **Lock webhook CORS** to the live domain (apex + www) ✅
+- [x] **Customer confirmation email** — LIVE via Gmail node, branded, reply-to `hello@` (SMTP is blocked on Railway — see automation-plan §5) ✅
 - [ ] **Voice line:** upgrade Twilio off the trial account before giving the number to real customers (removes the "trial account" message callers hear)
 - [ ] **Enable Cloudflare Web Analytics** (cookieless) — dashboard toggle
 - [ ] Optional: add **Cloudflare Turnstile** (CAPTCHA) to the booking form

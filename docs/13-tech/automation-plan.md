@@ -72,7 +72,9 @@ Each phase plugs into the same Postgres spine.
 **Phase 1 — Booking pipeline** — ✅ DONE (see §3).
 
 **Phase 2 — Customer comms + scheduling**
-- Customer **booking confirmation** (email/SMS) — *needs a customer comms channel (see §5)*
+- ✅ Customer **booking confirmation email** — **LIVE.** Sent via the **Gmail node** (HTTPS)
+  from the dedicated "The Garment Concierge" Gmail; branded HTML, reply-to `hello@`, with a
+  fail-safe so a mail issue never blocks a booking saving.
 - **Day-before collection reminder**
 - **Daily founder digest** — morning Telegram: today's collections, returns, revenue, issues *(uses Postgres + Telegram — no new integration)*
 - **Daily route list** grouped by area → **HITL: approve route**
@@ -106,8 +108,15 @@ Each phase plugs into the same Postgres spine.
 | Telegram (@Thegarmentconciergebot) | ✅ | Founder alerts + HITL approvals |
 | Slack | ✅ (available) | Optional alternative notifier |
 | **Stripe** | ⏳ needed for Phase 4 | Payments, membership billing |
-| **Customer comms** (Resend/SendGrid email **or** Twilio SMS) | ⏳ needed for Phase 2 | Customer confirmations & reminders |
+| **Customer email** — **Gmail node** (HTTPS API) | ✅ LIVE | Booking confirmation emails (from the dedicated Garment Concierge Gmail) |
 | WhatsApp | Click-to-chat live on site (manual). **WhatsApp Business API via Twilio** = future automated channel | Fast customer response |
+
+> ⚠️ **Gotcha — Railway blocks outbound SMTP** (ports 25/465/587), so PrivateEmail SMTP
+> times out from n8n (confirmed: clean "Connection timeout"). Customer email therefore goes
+> via the **Gmail node** (Google's HTTPS API), which Railway allows. The send shows display
+> name "The Garment Concierge" + reply-to `hello@`. To make the *visible* sender read
+> `hello@` (not the Gmail address), add an HTTP email API like **Resend** later (needs DNS
+> verification). Don't waste time debugging SMTP credentials — the port is the blocker.
 
 ---
 
